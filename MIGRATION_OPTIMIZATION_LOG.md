@@ -52,6 +52,11 @@
    - 补充 `README.md`，说明 GRCh38 流程、关键资源、WES/WGS 模式和主要输出。
    - 新增本文档记录迁移操作。
 
+6. 仓库清理
+   - 确认 `workflow.wdl`、`tasks/*.wdl`、`defaults`、`inputs`、`README.md`、`manifest.json` 和 `schema.json` 未引用 `codescripts/` 与 `pictures/`。
+   - `codescripts/` 与 `pictures/` 不属于 hg38 主流程运行所需内容，已从 Git 跟踪中删除。
+   - `.gitignore` 保留对 `codescripts/` 与 `pictures/` 的忽略规则，避免后续误提交。
+
 ## hg38 资源确认
 
 `GRCH38_filelist.txt` 中已列出本次新增逻辑所需资源：
@@ -73,5 +78,6 @@
 - `tasks/*.wdl`
 - `README.md`
 - 删除 `MIGRATION_OPTIMIZATION_LOG.md`
+- 如需恢复旧脚本或图片，可从删除前提交 `a359e61` 取回 `codescripts/` 与 `pictures/`
 
 如果只想撤销 contamination 相关逻辑，需要同时处理 `workflow.wdl`、`inputs`、`defaults`、`tasks/get_pileup_summaries.wdl`、`tasks/calculate_contamination.wdl` 和 `tasks/filter_and_select_pass_variants.wdl`，否则主流程输入输出会不匹配。
